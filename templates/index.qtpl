@@ -1,0 +1,41 @@
+{% func IndexPage(white, red, green, blue int) %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LED strip controller</title>
+    <script>
+        function updateTextInput(id, val) {
+            document.getElementById(id).value = val;
+        }
+    </script>
+</head>
+<body>
+<form action="" method="post">
+    <p>
+        <label for="ch1">White</label><br>
+        <input type="range" id="ch1" name="white" value="{%d white %}" min="0" max="4095" onchange="updateTextInput('v1', this.value);">
+        <input type="text" id="v1" value="{%d white %}" disabled>
+    </p>
+    <p>
+        <label for="ch2">Red</label><br>
+        <input type="range" id="ch2" name="red" value="{%d red %}" min="0" max="4095" onchange="updateTextInput('v2', this.value);">
+        <input type="text" id="v2" value="{%d red %}" disabled>
+    </p>
+    <p>
+        <label for="ch3">Green</label><br>
+        <input type="range" id="ch3" name="green" value="{%d green %}" min="0" max="4095" onchange="updateTextInput('v3', this.value);">
+        <input type="text" id="v3" value="{%d green %}" disabled>
+    </p>
+    <p>
+        <label for="ch4">Blue</label><br>
+        <input type="range" id="ch4" name="blue" value="{%d blue %}" min="0" max="4095" onchange="updateTextInput('v4', this.value);">
+        <input type="text" id="v4" value="{%d blue %}" disabled>
+    </p>
+    <p>
+        <input type="submit">
+    </p>
+</form>
+</body>
+</html>
+{% endfunc %}
