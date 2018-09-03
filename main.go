@@ -25,6 +25,10 @@ var (
 	userLed, alertLed, emptyLed, fullLed ledData
 )
 
+func alertHandler(w http.ResponseWriter, r *http.Request) {
+	alert()
+}
+
 func (data *ledData) indexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		fmt.Fprint(w, templates.IndexPage(data.white, data.red, data.green, data.blue))
@@ -87,8 +91,18 @@ func alert() {
 }
 
 func main() {
-	userLed = ledData{}
-	emptyLed = ledData{}
+	userLed = ledData{
+		white: 4095,
+		red:   4095,
+		green: 4095,
+		blue:  4095,
+	}
+	emptyLed = ledData{
+		white: 0,
+		red:   0,
+		green: 0,
+		blue:  0,
+	}
 	fullLed = ledData{
 		white: 4095,
 		red:   4095,
@@ -103,5 +117,6 @@ func main() {
 	}
 	fullLed.apply()
 	http.HandleFunc("/", userLed.indexHandler)
+	http.HandleFunc("/alert/", alertHandler)
 	http.ListenAndServe(":5601", nil)
 }
