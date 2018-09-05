@@ -8,29 +8,73 @@
         function updateTextInput(id, val) {
             document.getElementById(id).value = val;
         }
+
+        function post(path, params, method) {
+            method = method || "post";
+
+            var form = document.createElement("form");
+            form.setAttribute("method", method);
+            form.setAttribute("action", path);
+
+            for (var key in params) {
+                if (params.hasOwnProperty(key)) {
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", key);
+                    hiddenField.setAttribute("value", params[key]);
+
+                    form.appendChild(hiddenField);
+                }
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        function sendRequest() {
+            post("/", {
+                white: document.getElementById("ch1").value,
+                red: document.getElementById("ch2").value,
+                green: document.getElementById("ch3").value,
+                blue: document.getElementById("ch4").value,
+            }, "post")
+        }
     </script>
 </head>
 <body>
+<datalist id="tickmarks">
+    <option value="0" label="0%">
+    <option value="10">
+    <option value="20">
+    <option value="30">
+    <option value="40">
+    <option value="50" label="50%">
+    <option value="60">
+    <option value="70">
+    <option value="80">
+    <option value="90">
+    <option value="100" label="100%">
+</datalist>
 <form action="" method="post">
     <p>
         <label for="ch1">White</label><br>
-        <input type="range" id="ch1" name="white" value="{%d int(white) %}" min="0" max="4095" onchange="updateTextInput('v1', this.value);">
-        <input type="text" id="v1" value="{%d int(white) %}" disabled>
+        <input type="range" id="ch1" name="white" value="{%d int(white) %}" min="0" max="100" onchange="sendRequest()"
+               list="tickmarks">
     </p>
     <p>
         <label for="ch2">Red</label><br>
-        <input type="range" id="ch2" name="red" value="{%d int(red) %}" min="0" max="4095" onchange="updateTextInput('v2', this.value);">
-        <input type="text" id="v2" value="{%d int(red) %}" disabled>
+        <input type="range" id="ch2" name="red" value="{%d int(red) %}" min="0" max="100" onchange="sendRequest()"
+               list="tickmarks">
     </p>
     <p>
         <label for="ch3">Green</label><br>
-        <input type="range" id="ch3" name="green" value="{%d int(green) %}" min="0" max="4095" onchange="updateTextInput('v3', this.value);">
-        <input type="text" id="v3" value="{%d int(green) %}" disabled>
+        <input type="range" id="ch3" name="green" value="{%d int(green) %}" min="0" max="100" onchange="sendRequest()"
+               list="tickmarks">
     </p>
     <p>
         <label for="ch4">Blue</label><br>
-        <input type="range" id="ch4" name="blue" value="{%d int(blue) %}" min="0" max="4095" onchange="updateTextInput('v4', this.value);">
-        <input type="text" id="v4" value="{%d int(blue) %}" disabled>
+        <input type="range" id="ch4" name="blue" value="{%d int(blue) %}" min="0" max="100" onchange="sendRequest()"
+               list="tickmarks">
     </p>
     <p>
         <input type="submit">
