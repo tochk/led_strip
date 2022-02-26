@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
-	"github.com/tochk/led_strip/controller"
-	"github.com/tochk/led_strip/templates"
+	log "github.com/sirupsen/logrus"
+	"github.com/tochk/led_strip/internal/app/controller"
+	"github.com/tochk/led_strip/internal/app/templates"
 )
 
 var currentLed controller.Led

@@ -4,8 +4,8 @@ import (
 	"github.com/kidoman/embd"
 	"github.com/kidoman/embd/controller/pca9685"
 
-	log "github.com/Sirupsen/logrus"
 	_ "github.com/kidoman/embd/host/rpi"
+	log "github.com/sirupsen/logrus"
 )
 
 var server struct {
